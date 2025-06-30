@@ -1,0 +1,16 @@
+openapi: 3.0.1
+info:
+  title: Cortex plugin sample
+  description: "This sample plugin is created via plugin cookiecutter. It is referenced\
+    \ within Cortex Prod via a \"Download zip\" button, which points to e.g. `gitub.com/cortexapps/repo.zip`"
+  x-cortex-tag: cortex-plugin-sample
+  x-cortex-git:
+    github:
+      repository: cortexapps/cortex-plugin-sample
+  x-cortex-owners:
+  - name: self-service
+    provider: CORTEX
+    type: GROUP
+  x-cortex-custom-metadata:
+    cortex-template-version: 0.1.0
+    cortex-generated-timestamp: 2025-04-21T19:34:10.108796048
