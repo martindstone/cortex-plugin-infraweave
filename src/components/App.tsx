@@ -3,6 +3,8 @@ import type React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PluginProvider from "./RoutingPluginProvider";
 import { InfraweavePluginContextProvider } from "./infraweave/contexts/InfraweaveConfigContext";
+import { SelectedProjectsProvider } from "./infraweave/contexts/SelectedProjectsContext";
+import { SelectedProvidersProvider } from "./infraweave/contexts/SelectedProvidersContext";
 import ErrorBoundary from "./ErrorBoundary";
 import AppTabs from "./AppTabs";
 
@@ -16,7 +18,11 @@ const App: React.FC = () => {
       <QueryClientProvider client={queryClient}>
         <PluginProvider enableRouting initialEntries={["/overview"]}>
           <InfraweavePluginContextProvider entityTag="infraweave-plugin-config">
-            <AppTabs />
+            <SelectedProvidersProvider>
+              <SelectedProjectsProvider>
+                <AppTabs />
+              </SelectedProjectsProvider>
+            </SelectedProvidersProvider>
           </InfraweavePluginContextProvider>
         </PluginProvider>
       </QueryClientProvider>
