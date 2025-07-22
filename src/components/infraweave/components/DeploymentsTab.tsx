@@ -1,5 +1,5 @@
 // src/components/tabs/DeploymentsTab.tsx
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -17,21 +17,20 @@ import {
 } from '@cortexapps/react-plugin-ui';
 import { RefreshCw, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
 import { useProjects, useMultipleDeployments } from '../backend/infraweave';
+import { useSelectedProjects } from '../contexts/SelectedProjectsContext';
 
 const DeploymentsTab: React.FC = () => {
-  const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
-  const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [searchFilter, setSearchFilter] = useState('');
 
-  const { data: projects, isLoading: projectsLoading } = useProjects();
+  const {
+    selectedProjects,
+    selectedRegions,
+    setSelectedProjects,
+    setSelectedRegions,
+    availableRegions,
+  } = useSelectedProjects();
 
-  // Get all unique regions from selected projects
-  const availableRegions = useMemo(() => {
-    return projects
-      ?.filter(p => selectedProjects.includes(p.project_id))
-      .flatMap(p => p.regions)
-      .filter((region, index, self) => self.indexOf(region) === index) || [];
-  }, [projects, selectedProjects]);
+  const { data: projects, isLoading: projectsLoading } = useProjects();
 
   // Build queries for selected project/region combinations using useMemo for stability
   const deploymentQueries = useMemo(() => {
@@ -79,16 +78,12 @@ const DeploymentsTab: React.FC = () => {
     return variants[status] || 'secondary';
   };
 
-  // Handle project selection
+  // Handle project selection (single select for now)
   const handleProjectChange = (value: string) => {
-    const newSelectedProjects = value ? [value] : [];
-    setSelectedProjects(newSelectedProjects);
-    
-    // Clear regions when projects change
+    setSelectedProjects(value ? [value] : []);
     setSelectedRegions([]);
   };
 
-  // Handle region selection
   const handleRegionChange = (value: string) => {
     setSelectedRegions(value ? [value] : []);
   };
