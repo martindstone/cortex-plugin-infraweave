@@ -1,5 +1,5 @@
 // src/components/tabs/ProjectsTab.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Badge,
   Button,
@@ -13,8 +13,17 @@ import {
 import { Building, ExternalLink, GitBranch, MapPin } from "lucide-react";
 import { useProjects } from "../backend/infraweave";
 
-const ProjectsTab: React.FC = () => {
-  const [searchFilter, setSearchFilter] = useState("");
+interface ProjectsTabProps {
+  params: Record<string, string>;
+  setParams: (p: Record<string, string | undefined>) => void;
+}
+
+const ProjectsTab: React.FC<ProjectsTabProps> = ({ params, setParams }) => {
+  const [searchFilter, setSearchFilter] = useState(params.search ?? "");
+
+  useEffect(() => {
+    setSearchFilter(params.search ?? "");
+  }, [params.search]);
 
   const { data: projects, isLoading, error } = useProjects();
 
@@ -77,7 +86,10 @@ const ProjectsTab: React.FC = () => {
           <Input
             placeholder="Search projects..."
             value={searchFilter}
-            onChange={(e) => setSearchFilter(e.target.value)}
+            onChange={(e) => {
+              setSearchFilter(e.target.value);
+              setParams({ search: e.target.value });
+            }}
             className="pl-10"
           />
         </CardContent>

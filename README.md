@@ -1,6 +1,6 @@
-# cortex-plugin-sample
+# cortex-plugin-infraweave
 
-cortex-plugin-sample is a [Cortex](https://www.cortex.io/) plugin. To see how to run the plugin inside of Cortex, see [our docs](https://docs.cortex.io/docs/plugins).
+cortex-plugin-infraweave is a [Cortex](https://www.cortex.io/) plugin. To see how to run the plugin inside of Cortex, see [our docs](https://docs.cortex.io/docs/plugins).
 
 ### Prerequisites
 

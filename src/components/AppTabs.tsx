@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -25,23 +25,25 @@ import StacksTab from "./infraweave/components/StacksTab";
 import PoliciesTab from "./infraweave/components/PoliciesTab";
 import ProjectsTab from "./infraweave/components/ProjectsTab";
 import "../baseStyles.css";
+import useTabParams from "../hooks/useTabParams";
 
 interface TabRoute {
   label: string;
   path: string;
-  element: JSX.Element;
+  element: React.ReactElement;
 }
 
 export const AppTabs: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { params, setParams } = useTabParams();
 
   const tabRoutes: TabRoute[] = [
     { label: "Overview", path: "/overview", element: <OverviewTab /> },
     { label: "Modules", path: "/modules", element: <ModulesTab /> },
     { label: "Stacks", path: "/stacks", element: <StacksTab /> },
     { label: "Policies", path: "/policies", element: <PoliciesTab /> },
-    { label: "Projects", path: "/projects", element: <ProjectsTab /> },
+    { label: "Projects", path: "/projects", element: <ProjectsTab params={params} setParams={setParams} /> },
     { label: "Deployments", path: "/deployments", element: <DeploymentsTab /> },
 
     // Uncomment these lines to enable the additional tabs for development or testing
@@ -53,7 +55,9 @@ export const AppTabs: React.FC = () => {
   ];
 
   const handleTabsChange = (value: string): void => {
-    void navigate(value);
+    const search = new URLSearchParams(params).toString();
+    const url = search ? `${value}?${search}` : value;
+    void navigate(url);
   };
 
   return (
@@ -83,7 +87,7 @@ export const AppTabs: React.FC = () => {
                 key={index}
                 value={route.path}
               >
-                {route.element}
+                {React.cloneElement(route.element, { params, setParams })}
               </TabsContent>
             ))}
           </CardContent>
