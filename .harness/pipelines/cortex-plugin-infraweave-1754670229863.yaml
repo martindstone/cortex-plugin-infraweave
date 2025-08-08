@@ -33,7 +33,7 @@ pipeline:
                       echo "home: ${HOME}"
                       . "$HOME/.nvm/nvm.sh"
                       nvm install v22
-                      npm run install
+                      npm install
                       npm run build
           platform:
             os: Linux
