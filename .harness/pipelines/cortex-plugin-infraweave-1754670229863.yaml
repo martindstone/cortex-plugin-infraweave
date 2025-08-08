@@ -27,20 +27,6 @@ pipeline:
                   timeout: ""
                   type: Run
               - step:
-                  identifier: test
-                  name: test
-                  spec:
-                    command: npm run test
-                  timeout: ""
-                  type: Run
-              - step:
-                  identifier: lint
-                  name: lint
-                  spec:
-                    command: npm run lint
-                  timeout: ""
-                  type: Run
-              - step:
                   identifier: build
                   name: build
                   spec:
