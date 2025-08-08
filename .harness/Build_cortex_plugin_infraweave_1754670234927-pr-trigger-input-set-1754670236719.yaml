@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_cortex_plugin_infraweave_1754670234927-pr-trigger-input-set
+  identifier: Build_cortex_plugin_infraweave_1754670234927prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_cortex_plugin_infraweave_1754670234927
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
