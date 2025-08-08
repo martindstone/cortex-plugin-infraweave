@@ -20,6 +20,17 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Run
+                  name: Run_3
+                  identifier: Run_3
+                  spec:
+                    shell: Sh
+                    command: |-
+                      echo -n "id: "
+                      id
+                      echo -n "pwd: "
+                      pwd
+              - step:
                   identifier: installdependencies
                   name: install dependencies
                   spec:
