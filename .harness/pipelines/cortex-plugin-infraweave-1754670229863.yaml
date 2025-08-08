@@ -32,7 +32,7 @@ pipeline:
                       pwd
                       echo "home: ${HOME}"
                       . "$HOME/.nvm/nvm.sh"
-                      nvm use v22
+                      nvm list
               - step:
                   identifier: installdependencies
                   name: install dependencies
