@@ -21,7 +21,7 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Run_3
+                  name: print env
                   identifier: Run_3
                   spec:
                     shell: Sh
@@ -30,6 +30,9 @@ pipeline:
                       id
                       echo -n "pwd: "
                       pwd
+                      echo "home: ${HOME}"
+                      . "$HOME/.nvm/nvm.sh"
+                      nvm use v22
               - step:
                   identifier: installdependencies
                   name: install dependencies
