@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_cortex_plugin_infraweave_1754670234927-push-trigger-input-set
+  identifier: Build_cortex_plugin_infraweave_1754670234927pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_cortex_plugin_infraweave_1754670234927
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
