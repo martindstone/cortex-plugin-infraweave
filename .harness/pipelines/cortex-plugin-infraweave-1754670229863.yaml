@@ -23,14 +23,16 @@ pipeline:
                   identifier: installdependencies
                   name: install dependencies
                   spec:
-                    command: npm install
+                    shell: Sh
+                    command: yarn
                   timeout: ""
                   type: Run
               - step:
                   identifier: build
                   name: build
                   spec:
-                    command: npm run build
+                    shell: Sh
+                    command: yarn build
                   timeout: ""
                   type: Run
           platform:
