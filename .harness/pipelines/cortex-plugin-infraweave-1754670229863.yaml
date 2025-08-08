@@ -33,8 +33,9 @@ pipeline:
                       echo "home: ${HOME}"
                       . "$HOME/.nvm/nvm.sh"
                       nvm install v22
-                      npm install
-                      npm run build
+                      export COREPACK_ENABLE_DOWNLOAD_PROMPT=0 && corepack enable yarn
+                      yarn
+                      yarn build
           platform:
             os: Linux
             arch: Amd64
